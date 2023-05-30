@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost:3306
--- Generation Time: May 30, 2023 at 04:20 AM
+-- Generation Time: May 30, 2023 at 01:33 PM
 -- Server version: 8.0.30
 -- PHP Version: 8.1.10
 
@@ -43,8 +43,21 @@ CREATE TABLE `tbl_game` (
 
 CREATE TABLE `tbl_kategori` (
   `id_kategori` int NOT NULL,
-  `nama_kategori` int NOT NULL
+  `nama_kategori` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+--
+-- Dumping data for table `tbl_kategori`
+--
+
+INSERT INTO `tbl_kategori` (`id_kategori`, `nama_kategori`) VALUES
+(2, 'Petualangan'),
+(3, 'Olahraga'),
+(4, 'Multiplayer'),
+(5, 'Horror'),
+(6, 'FPS'),
+(7, 'RPG'),
+(8, 'Open World');
 
 -- --------------------------------------------------------
 
@@ -159,13 +172,13 @@ ALTER TABLE `tbl_user`
 -- AUTO_INCREMENT for table `tbl_game`
 --
 ALTER TABLE `tbl_game`
-  MODIFY `id_game` int NOT NULL AUTO_INCREMENT;
+  MODIFY `id_game` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT for table `tbl_kategori`
 --
 ALTER TABLE `tbl_kategori`
-  MODIFY `id_kategori` int NOT NULL AUTO_INCREMENT;
+  MODIFY `id_kategori` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
 -- AUTO_INCREMENT for table `tbl_pengisian`

@@ -1,5 +1,5 @@
 <?php
-defined('BASEPATH') OR exit('No direct script access allowed');
+defined('BASEPATH') or exit('No direct script access allowed');
 ?>
 
 <!-- Sidebar -->
@@ -31,10 +31,18 @@ defined('BASEPATH') OR exit('No direct script access allowed');
         Pengelolaan
     </div>
 
+    <li class="nav-item <?= uri_is('admin/kategori', 'admin/kategori/*') ? 'active' : '' ?>">
+        <a class="nav-link" href="<?= site_url('admin/kategori') ?>">
+            <i class="fas fa-fw fa-list"></i>
+            <span>Kelola Kategori</span>
+        </a>
+    </li>
+
     <li class="nav-item <?= uri_is('admin/game', 'admin/game/*') ? 'active' : '' ?>">
         <a class="nav-link" href="<?= site_url('admin/game') ?>">
-            <i class="fas fa-fw fa-book"></i>
-            <span>Kelola Game</span></a>
+            <i class="fas fa-fw fa-gamepad"></i>
+            <span>Kelola Game</span>
+        </a>
     </li>
 
     <!-- Divider -->

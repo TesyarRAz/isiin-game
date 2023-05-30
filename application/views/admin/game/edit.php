@@ -3,64 +3,64 @@
     <h1 class="h3 mb-0 text-gray-800">Edit Game</h1>
 </div>
 
-<form action="<?= site_url('admin/game/update/' . $id) ?>" class="card card-body" method="POST">
+<form action="<?= site_url('admin/game/update/'. $id_game) ?>" class="card card-body" method="POST" enctype="multipart/form-data">
     <div class="row">
         <div class="col-md-6">
             <div class="form-group">
-                <label class="font-weight-bold" for="judul_buku">Judul Buku <span class="text-danger">*</span></label>
-                <input type="text" class="form-control" name="judul_buku" id="judul_buku" value="<?= $judul_buku ?>" required>
+                <label class="font-weight-bold" for="nama_game">Nama Game <span class="text-danger">*</span></label>
+                <input type="text" class="form-control" name="nama_game" id="nama_game" value="<?= $nama_game ?>" required>
+                <?= form_error('nama_game') ?>
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="form-group">
+                <label class="font-weight-bold" for="ukuran_game">Ukuran <span class="text-danger">*</span></label>
+                <div class="d-flex align-items-center">
+                    <input type="number" class="form-control" name="ukuran_game" id="ukuran_game" value="<?= $ukuran_game ?>" required> <span class="ml-3">MB</span>
+                </div>
+                <?= form_error('ukuran_game') ?>
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="form-group" data-toggle="image-preview">
+                <label class="font-weight-bold" for="gambar_game">Gambar <span class="text-danger">*</span></label>
+                <input type="file" class="d-none" name="gambar_game" id="gambar_game" data-source="true" accept="image/*" required>
+                <img src="<?= base_url(!empty($gambar_game) ? $gambar_game : 'assets/img/empty-image.png') ?>" role="button" class="d-block img-thumbnail img-flex" width="300" height="300" data-target="true" required>
+                <?= form_error('gambar_game') ?>
             </div>
         </div>
         <div class="col-md-6">
             <div class="form-group">
                 <label class="font-weight-bold" for="id_kategori">Kategori <span class="text-danger">*</span></label>
-                <select class="form-control" name="id_kategori" id="id_kategori" required>
-                    <?php foreach ($kategori as $item) : ?>
-                        <option value="<?= $item['id_kategori'] ?>" <?= $id_kategori == $item['id_kategori'] ? 'selected' : '' ?>><?= $item['nama_kategori'] ?></option>
-                    <?php endforeach ?>
-                </select>
+                <table class="table table-bordered table-sm">
+                    <thead>
+                        <tr>
+                            <th>Nama</th>
+                            <th>Pilih</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <?php foreach ($kategori as $item) : ?>
+                            <tr>
+                                <td><?= $item['nama_kategori'] ?></td>
+                                <td>
+                                    <div class="form-check form-switch">
+                                        <input name="kategori_game[]" value="<?= $item['id_kategori'] ?>" class="form-check-input" type="checkbox" role="switch" id="kategori-<?= $item['id_kategori'] ?>" <?php if (in_array($item['id_kategori'], $ids_kategori)): ?> checked <?php endif ?>>
+                                        <label class="form-check-label" for="kategori-<?= $item['id_kategori'] ?>"></label>
+                                    </div>
+                                </td>
+                            </tr>
+                        <?php endforeach ?>
+                    </tbody>
+                </table>
+                <?= form_error('kategori_game') ?>
             </div>
         </div>
         <div class="col-md-6">
             <div class="form-group">
-                <label class="font-weight-bold" for="pengarang">Pengarang <span class="text-danger">*</span></label>
-                <input type="text" class="form-control" name="pengarang" id="pengarang" value="<?= $pengarang ?>" required>
-            </div>
-        </div>
-        <div class="col-md-6">
-            <div class="form-group">
-                <label class="font-weight-bold" for="penerbit">Penerbit <span class="text-danger">*</span></label>
-                <input type="text" class="form-control" name="penerbit" id="penerbit" value="<?= $penerbit ?>" required>
-            </div>
-        </div>
-        <div class="col-md-6">
-            <div class="form-group">
-                <label class="font-weight-bold" for="tahun_terbit">Tahun Terbit <span class="text-danger">*</span></label>
-                <input type="number" class="form-control" name="tahun_terbit" id="tahun_terbit" value="<?= $tahun_terbit ?>" required>
-            </div>
-        </div>
-        <div class="col-md-6">
-            <div class="form-group">
-                <label class="font-weight-bold" for="isbn">ISBN <span class="text-danger">*</span></label>
-                <input type="text" class="form-control" name="isbn" id="isbn" value="<?= $isbn ?>" required>
-            </div>
-        </div>
-        <div class="col-md-6">
-            <div class="form-group">
-                <label class="font-weight-bold" for="stok">Stok <span class="text-danger">*</span></label>
-                <input type="number" class="form-control" name="stok" id="stok" value="<?= $stok ?>" required>
-            </div>
-        </div>
-        <div class="col-md-6">
-            <div class="form-group">
-                <label class="font-weight-bold" for="dipinjam">Dipinjam <span class="text-danger">*</span></label>
-                <input type="number" class="form-control" name="dipinjam" id="dipinjam" value="<?= $dipinjam ?>" required>
-            </div>
-        </div>
-        <div class="col-md-6">
-            <div class="form-group">
-                <label class="font-weight-bold" for="dibooking">Dibooking <span class="text-danger">*</span></label>
-                <input type="number" class="form-control" name="dibooking" id="dibooking" value="<?= $dibooking ?>" required>
+                <label class="font-weight-bold" for="deskripsi_game">Deskripsi <span class="text-danger">*</span></label>
+                <textarea class="form-control" name="deskripsi_game" id="deskripsi_game" required><?= $deskripsi_game ?></textarea>
+                <?= form_error('deskripsi_game') ?>
             </div>
         </div>
     </div>
