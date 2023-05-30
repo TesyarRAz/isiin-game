@@ -18,4 +18,13 @@ class Template
             'footer' => $this->instance->load->view('templates/admin/footer', [], true),
         ]);
     }
+
+    public function render_app($content, $data = [], $css = [], $js = [])
+    {
+        $this->instance->load->view('templates/app', [
+            'content' => $this->instance->load->view($content, $data, true),
+            'css' => $css,
+            'js' => $js,
+        ]);
+    }
 }
