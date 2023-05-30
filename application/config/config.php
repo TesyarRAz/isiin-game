@@ -531,4 +531,4 @@ $config['rewrite_short_tags'] = FALSE;
 */
 $config['proxy_ips'] = '';
 
-$config['app_name'] = 'Isiin Game';
+$config['app_name'] = 'IsiinGame';

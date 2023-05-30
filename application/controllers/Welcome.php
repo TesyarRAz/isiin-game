@@ -11,4 +11,14 @@ class Welcome extends CI_Controller {
 	{
 		
 	}
+
+	public function login()
+	{
+		$this->template->render_app('auth/login');
+	}
+
+	public function register()
+	{
+		$this->template->render_app('auth/register');
+	}
 }

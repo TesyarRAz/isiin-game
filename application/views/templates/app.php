@@ -46,6 +46,14 @@ defined('BASEPATH') or exit('No direct script access allowed');
                         <a class="nav-link <?= uri_is('welcome/harga') ? 'active' : '' ?>" href="<?= site_url('welcome/harga') ?>">Harga</a>
                     </li>
                 </ul>
+                <ul class="navbar-nav">
+                    <li class="nav-item">
+                        <a class="nav-link <?= uri_is('welcome/login', 'welcome/register') ? 'active' : '' ?>" href="<?= site_url('welcome/login') ?>">
+                            <i class="fas fa-fw fa-user"></i>
+                            Masuk
+                        </a>
+                    </li>
+                </ul>
             </div>
         </div>
     </nav>
