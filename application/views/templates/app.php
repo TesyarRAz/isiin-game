@@ -37,7 +37,7 @@ defined('BASEPATH') or exit('No direct script access allowed');
             <div class="collapse navbar-collapse" id="navbar">
                 <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                     <li class="nav-item">
-                        <a class="nav-link <?= uri_is('welcome') ? 'active' : '' ?>" href="<?= site_url('welcome') ?>">Home</a>
+                        <a class="nav-link <?= uri_is('welcome', '/') ? 'active' : '' ?>" href="<?= site_url('/') ?>">Home</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link <?= uri_is('game', 'game/*') ? 'active' : '' ?>" href="<?= site_url('game') ?>">Games</a>
@@ -48,10 +48,17 @@ defined('BASEPATH') or exit('No direct script access allowed');
                 </ul>
                 <ul class="navbar-nav">
                     <li class="nav-item">
-                        <a class="nav-link <?= uri_is('welcome/login', 'welcome/register') ? 'active' : '' ?>" href="<?= site_url('welcome/login') ?>">
-                            <i class="fas fa-fw fa-user"></i>
-                            Masuk
-                        </a>
+                        <?php if (!$this->session->has_userdata('id_user')) : ?>
+                            <a class="nav-link <?= uri_is('welcome/login', 'welcome/register') ? 'active' : '' ?>" href="<?= site_url('welcome/login') ?>">
+                                <i class="fas fa-fw fa-user"></i>
+                                Masuk
+                            </a>
+                        <?php else: ?>
+                            <a class="nav-link" href="<?= site_url('admin') ?>">
+                                <i class="fas fa-fw fa-home"></i>
+                                Dashboard
+                            </a>
+                        <?php endif ?>
                     </li>
                 </ul>
             </div>
@@ -61,7 +68,7 @@ defined('BASEPATH') or exit('No direct script access allowed');
     <?= $content ?>
 
     <footer class="mt-auto text-center bg-dark text-white py-2 fw-bold">
-        Copyright &copy; IsiinGame
+        Copyright &copy; IsiinGame 2023
     </footer>
 
     <!-- Bootstrap core JavaScript-->

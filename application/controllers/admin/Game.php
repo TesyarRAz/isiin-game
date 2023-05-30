@@ -1,7 +1,7 @@
 <?php
 defined('BASEPATH') or exit('No direct script access allowed');
 
-class Game extends CI_Controller
+class Game extends Admin_Controller
 {
     public function index()
     {
@@ -17,6 +17,13 @@ class Game extends CI_Controller
         $data["links"] = $this->pagination->create_links();
         $data['games'] = $this->game_model->latest()->page($config['per_page'], $page)->all();
 
-        $this->template->render_app('game', $data);
+        $this->template->render_admin('admin/game/index', $data);
+    }
+
+    public function create()
+    {
+        $data['kategori'] = $this->game_model->latest_kategori()->all_kategori();
+
+        $this->template->render_admin('admin/game/create', $data);
     }
 }

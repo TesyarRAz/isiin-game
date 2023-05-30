@@ -17,14 +17,15 @@ defined('BASEPATH') or exit('No direct script access allowed');
                     </div>
                     <div class="mb-3">
                         <label class="fw-bold mb-1" for="password">Password</label>
-                        <input id="password" type="text" class="form-control" name="password" placeholder="Masukan Password" required>
+                        <input id="password" type="password" class="form-control" name="password" placeholder="Masukan Password" required>
+                        <?= $this->session->flashdata('message') ? '<span class="text-danger ms-1">' . $this->session->flashdata('message') . '</span>' : '' ?>
                     </div>
 
                     <div class="d-flex justify-content-between">
                         <span>Belum punya akun? <a href="<?= site_url('welcome/register') ?>" class="text-decoration-none">Klik disini</a></span>
 
                         <div class="ms-auto">
-                            <button type="button" class="btn btn-dark">Masuk</button>
+                            <button type="submit" class="btn btn-dark">Masuk</button>
                         </div>
                     </div>
                 </div>
