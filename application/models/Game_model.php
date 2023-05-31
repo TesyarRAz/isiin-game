@@ -115,4 +115,11 @@ class Game_model extends CI_Model
     {
         return $this->db->delete('tbl_game', $where);
     }
+
+    public function where_in($games)
+    {
+        $this->db->where_in('id_game', $games);
+
+        return $this;
+    }
 }

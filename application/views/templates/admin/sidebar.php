@@ -45,6 +45,13 @@ defined('BASEPATH') or exit('No direct script access allowed');
         </a>
     </li>
 
+    <li class="nav-item <?= uri_is('admin/pengisian', 'admin/pengisian/*') ? 'active' : '' ?>">
+        <a class="nav-link" href="<?= site_url('admin/pengisian') ?>">
+            <i class="fas fa-fw fa-hdd"></i>
+            <span>Kelola Pengisian</span>
+        </a>
+    </li>
+
     <!-- Divider -->
     <hr class="sidebar-divider d-none d-md-block">
 

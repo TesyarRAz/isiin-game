@@ -29,7 +29,7 @@
                 <?= form_error('gambar_game') ?>
             </div>
         </div>
-        <div class="col-md-6">
+        <div class="col-12">
             <div class="form-group">
                 <label class="font-weight-bold" for="id_kategori">Kategori <span class="text-danger">*</span></label>
                 <table class="table table-bordered table-sm">

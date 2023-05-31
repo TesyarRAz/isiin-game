@@ -9,7 +9,7 @@ class Welcome extends CI_Controller {
 
 	public function harga()
 	{
-		
+		$this->template->render_app('harga');
 	}
 
 	public function login()
