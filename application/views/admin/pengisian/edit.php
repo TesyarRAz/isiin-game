@@ -5,27 +5,40 @@
 
 <form action="<?= site_url('admin/pengisian/update/' . $id_pengisian) ?>" class="card card-body" method="POST" enctype="multipart/form-data">
     <div class="row">
-        <div class="col-md-6">
+        <div class="col-md-4">
             <div class="form-group">
                 <label class="font-weight-bold" for="kode_pengisian">Kode Pengisian <span class="text-danger">*</span></label>
                 <input type="text" class="form-control" name="kode_pengisian" id="kode_pengisian" value="<?= $kode_pengisian ?>" readonly required>
                 <?= form_error('kode_pengisian') ?>
             </div>
         </div>
-        <div class="col-md-6">
+        <div class="col-md-4">
             <div class="form-group">
                 <label class="font-weight-bold" for="nama_pemesan">Nama Pemesan <span class="text-danger">*</span></label>
                 <input type="text" class="form-control" name="nama_pemesan" id="nama_pemesan" value="<?= $nama_pemesan ?>" required>
                 <?= form_error('nama_pemesan') ?>
             </div>
         </div>
-        <div class="col-md-6">
+        <div class="col-md-4">
             <div class="form-group">
                 <label class="font-weight-bold" for="ukuran_penyimpanan">Ukuran Penyimpanan <span class="text-danger">*</span></label>
                 <div class="d-flex align-items-center">
                     <input type="number" class="form-control" name="ukuran_penyimpanan" id="ukuran_penyimpanan" value="<?= $ukuran_penyimpanan ?>" required> <span class="ml-3">MB</span>
                 </div>
                 <?= form_error('ukuran_penyimpanan') ?>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="form-group">
+                <label class="font-weight-bold" for="status">Status <span class="text-danger">*</span></label>
+                <div class="d-flex align-items-center">
+                    <select name="status" id="status" class="form-control" required>
+                        <option value="dibuat" <?= $status == 'dibuat' ? 'selected' : '' ?>>Dibuat</option>
+                        <option value="diatur" <?= $status == 'diatur' ? 'selected' : '' ?>>Diatur</option>
+                        <option value="selesai" <?= $status == 'selesai' ? 'selected' : '' ?>>Selesai</option>
+                    </select>
+                </div>
+                <?= form_error('status') ?>
             </div>
         </div>
         <div class="col-12">

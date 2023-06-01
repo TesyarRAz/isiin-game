@@ -40,7 +40,7 @@ class Admin_Controller extends User_Controller {
     public function __construct() {
         parent::__construct();
 
-        if (!$this->session->userdata('role') == 'admin') {
+        if ($this->session->userdata('role') != 'admin') {
             redirect('welcome/login');
         }
     }

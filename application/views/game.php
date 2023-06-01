@@ -1,21 +1,62 @@
 <main class="container my-5">
-    <h4>Daftar Game</h4>
+    <?php if (isset($active_pengisian)) : ?>
+        <div class="d-flex flex-column">
+            <div class="mb-1">Sisa Penyimpanan</div>
+            <div class="progress" role="progressbar">
+                <?php $digunakan_percent = 100 - (($active_pengisian['ukuran_penyimpanan'] - $active_pengisian['ukuran_digunakan']) / $active_pengisian['ukuran_penyimpanan']) * 100 ?>
+                <div class="progress-bar bg-secondary" style="width: <?= $digunakan_percent ?>%"></div>
+            </div>
+            <div class="d-flex justify-content-between">
+                <span class="text-muted small"><?= number_format($active_pengisian['ukuran_digunakan'], 0, ',', '.') ?> MB</span>
+                <span class="text-muted small"><?= number_format($active_pengisian['ukuran_penyimpanan'], 0, ',', '.') ?> MB</span>
+            </div>
+        </div>
+    <?php endif ?>
+
+    <div class="mt-5 d-flex justify-content-between align-items-center">
+        <h4>Daftar Game</h4>
+        <?php if (isset($active_pengisian)) : ?>
+            <form action="<?= site_url('pengisian/finalize') ?>" method="POST" onsubmit="return confirm('Ketika sudah selesai game tidak bisa diminta untuk ditambah kembali, yakin ?') ?>">
+                <button class="btn btn-sm btn-danger">
+                    <i class="fas fa-fw fa-save"></i>
+                    Selesai
+                </button>
+            </form>
+        <?php endif ?>
+    </div>
     <hr>
 
     <div class="row mt-3">
         <?php foreach ($games as $game) : ?>
-            <div class="card col-lg-3 col-md-4 col-6">
-                <img src="<?= base_url($game['gambar_game']) ?>" class="card-img-top img-fluid" alt="Gambar <?= $game['nama_game'] ?>">
-                <div class="card-body">
-                    <h5 class="card-title"><?= $game['nama_game'] ?></h5>
-                    <p class="card-text"><?= $game['deskripsi_game'] ?></p>
-                    <span class="text-muted small">Ukuran : <?= number_format($game['ukuran_game'], 0, ',', '.') ?> MB</span>
+            <div class="col-lg-3 col-md-4 col-6">
+                <div class="card">
+                    <img src="<?= base_url($game['gambar_game']) ?>" class="card-img-top img-fluid" alt="Gambar <?= $game['nama_game'] ?>">
+                    <div class="card-body">
+                        <h5 class="card-title"><?= $game['nama_game'] ?></h5>
+                        <p class="card-text"><?= $game['deskripsi_game'] ?></p>
+                        <span class="text-muted small">Ukuran : <?= ukuran_format($game['ukuran_game']) ?></span>
 
-                    <div class="d-flex justify-content-end">
-                        <button class="btn btn-sm btn-dark">
-                            <i class="fas fa-fw fa-plus"></i>
-                            Tambah
-                        </button>
+                        <?php if (isset($active_pengisian) && $active_pengisian) : ?>
+                            <div class="d-flex justify-content-end">
+                                <?php if (count(array_filter($active_pengisian['games'], fn ($e) => $e['id_game'] == $game['id_game'])) == 0) : ?>
+                                    <form action="<?= site_url('pengisian/store') ?>" method="POST">
+                                        <input type="hidden" name="id_game" value="<?= $game['id_game'] ?>">
+                                        <button class="btn btn-sm btn-outline-dark">
+                                            <i class="fas fa-fw fa-plus"></i>
+                                            Tambah
+                                        </button>
+                                    </form>
+                                <?php else : ?>
+                                    <form action="<?= site_url('pengisian/destroy') ?>" method="POST">
+                                        <input type="hidden" name="id_game" value="<?= $game['id_game'] ?>">
+                                        <button class="btn btn-sm btn-outline-dark">
+                                            <i class="fas fa-fw fa-trash-alt"></i>
+                                            Hapus
+                                        </button>
+                                    </form>
+                                <?php endif ?>
+                            </div>
+                        <?php endif ?>
                     </div>
                 </div>
             </div>

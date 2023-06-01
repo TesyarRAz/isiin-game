@@ -30,9 +30,11 @@
                         <td><?= number_format($item['ukuran_penyimpanan'], 0, ',', '.') ?> MB</td>
                         <td><?= number_format($item['ukuran_digunakan'], 0, ',', '.') ?> MB</td>
                         <td>
-                            <?php foreach ($item['games'] as $game) : ?>
-                                <span class="badge badge-success"><?= $game['nama_game'] ?></span>
-                            <?php endforeach ?>
+                            <?php if (isset($item['games'])) : ?>
+                                <?php foreach ($item['games'] as $game) : ?>
+                                    <span class="badge badge-success"><?= $game['nama_game'] ?></span>
+                                <?php endforeach ?>
+                            <?php endif ?>
                         </td>
                         <td>
                             <?= $item['nama_pemesan'] ?>

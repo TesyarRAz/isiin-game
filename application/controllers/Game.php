@@ -17,6 +17,10 @@ class Game extends CI_Controller
         $data["links"] = $this->pagination->create_links();
         $data['games'] = $this->game_model->latest()->page($config['per_page'], $page)->all();
 
+        if ($id_pengisian = $this->session->userdata('id_pengisian')) {
+            $data['active_pengisian'] = $this->pengisian_model->latest()->first_where(['id_pengisian' => $id_pengisian]);
+        }
+
         $this->template->render_app('game', $data);
     }
 }

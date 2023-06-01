@@ -47,18 +47,29 @@ defined('BASEPATH') or exit('No direct script access allowed');
                     </li>
                 </ul>
                 <ul class="navbar-nav">
-                    <li class="nav-item">
-                        <?php if (!$this->session->has_userdata('id_user')) : ?>
+                    <?php if (!$this->session->has_userdata('id_user')) : ?>
+                        <li class="nav-item">
                             <a class="nav-link <?= uri_is('welcome/login', 'welcome/register') ? 'active' : '' ?>" href="<?= site_url('welcome/login') ?>">
                                 <i class="fas fa-fw fa-user"></i>
                                 Masuk
                             </a>
-                        <?php else: ?>
+                        </li>
+                    <?php elseif ($this->session->userdata('role') == 'admin') : ?>
+                        <li class="nav-item">
                             <a class="nav-link" href="<?= site_url('admin') ?>">
                                 <i class="fas fa-fw fa-home"></i>
                                 Dashboard
                             </a>
-                        <?php endif ?>
+                        </li>
+                    <?php endif ?>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            <i class="fas fa-fw fa-user me-1"></i>
+                            Akun
+                        </a>
+                        <ul class="dropdown-menu dropdown-menu-end">
+                            <li><a class="dropdown-item" href="<?= site_url('auth/logout') ?>">Logout</a></li>
+                        </ul>
                     </li>
                 </ul>
             </div>

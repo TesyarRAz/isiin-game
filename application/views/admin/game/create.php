@@ -24,7 +24,7 @@
         <div class="col-md-6">
             <div class="form-group" data-toggle="image-preview">
                 <label class="font-weight-bold" for="gambar_game">Gambar <span class="text-danger">*</span></label>
-                <input type="file" class="d-none" name="gambar_game" id="gambar_game" data-source="true" accept="image/*" required>
+                <input type="file" class="d-none" name="gambar_game" id="gambar_game" data-source="true" accept="image/*">
                 <img src="<?= base_url('assets/img/empty-image.png') ?>" role="button" class="d-block img-thumbnail" width="300" height="300" data-target="true" required>
                 <?= form_error('gambar_game') ?>
             </div>

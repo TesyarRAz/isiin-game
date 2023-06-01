@@ -40,16 +40,18 @@ class Pengisian extends Admin_Controller
         $this->form_validation->set_rules('nama_pemesan', 'Nama Pemesan', 'required', [
             'required' => 'Harus mengisi %s',
         ]);
+        
+        $this->form_validation->set_rules('status', 'Status', 'required', [
+            'required' => 'Harus mengisi %s',
+        ]);
         $this->form_validation->set_error_delimiters('<span class="text-danger">', '</span>');
 
         if ($this->form_validation->run() === false) {
             return $this->create();
         }
 
-        $data = $this->input->post(['kode_pengisian', 'ukuran_penyimpanan', 'ukuran_digunakan', 'nama_pemesan']);
+        $data = $this->input->post(['kode_pengisian', 'ukuran_penyimpanan', 'nama_pemesan', 'status']);
         $games = $this->input->post('games');
-
-        $data['ukuran_digunakan'] = array_reduce(array_map(fn($e) => $e['ukuran_game'], $this->game_model->where_in($games)->all()), fn($a, $b) => $a + $b, 0);
 
         $id_pengisian = $this->pengisian_model->insert($data);
         $this->pengisian_model->sync_pengisian_game($id_pengisian, $games);
@@ -84,16 +86,18 @@ class Pengisian extends Admin_Controller
         $this->form_validation->set_rules('nama_pemesan', 'Nama Pemesan', 'required', [
             'required' => 'Harus mengisi %s',
         ]);
+        $this->form_validation->set_rules('status', 'Status', 'required', [
+            'required' => 'Harus mengisi %s',
+        ]);
         $this->form_validation->set_error_delimiters('<span class="text-danger">', '</span>');
 
         if ($this->form_validation->run() === false) {
             return $this->edit($id_pengisian);
         }
 
-        $data = $this->input->post(['kode_pengisian', 'ukuran_penyimpanan', 'ukuran_digunakan', 'nama_pemesan']);
+        $data = $this->input->post(['kode_pengisian', 'ukuran_penyimpanan', 'nama_pemesan', 'status']);
         $games = $this->input->post('games');
 
-        $data['ukuran_digunakan'] = array_reduce(array_map(fn($e) => $e['ukuran_game'], $this->game_model->where_in($games)->all()), fn($a, $b) => $a + $b, 0);
         $this->pengisian_model->update(['id_pengisian' => $id_pengisian], $data);
         $this->pengisian_model->sync_pengisian_game($id_pengisian, $games);
 
