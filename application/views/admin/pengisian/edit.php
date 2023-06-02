@@ -23,7 +23,7 @@
             <div class="form-group">
                 <label class="font-weight-bold" for="ukuran_penyimpanan">Ukuran Penyimpanan <span class="text-danger">*</span></label>
                 <div class="d-flex align-items-center">
-                    <input type="number" class="form-control" name="ukuran_penyimpanan" id="ukuran_penyimpanan" value="<?= $ukuran_penyimpanan ?>" required> <span class="ml-3">MB</span>
+                    <input type="number" class="form-control" name="ukuran_penyimpanan" id="ukuran_penyimpanan" value="<?= $ukuran_penyimpanan ?>" required> <span class="ml-3">GB</span>
                 </div>
                 <?= form_error('ukuran_penyimpanan') ?>
             </div>

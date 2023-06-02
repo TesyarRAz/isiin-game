@@ -35,7 +35,7 @@
                         <td>
                             <img src="<?= base_url($item['gambar_game']) ?>" alt="Gambar Game" class="img-thumbnail img-fluid" style="max-width: 100px; max-width: 100px">
                         </td>
-                        <td><?= $item['ukuran_game'] ?> MB</td>
+                        <td><?= ukuran_format($item['ukuran_game']) ?></td>
                         <td><?= $item['deskripsi_game'] ?></td>
                         <td>
                             <div>

@@ -18,7 +18,15 @@ class Game extends CI_Controller
         $data['games'] = $this->game_model->latest()->page($config['per_page'], $page)->all();
 
         if ($id_pengisian = $this->session->userdata('id_pengisian')) {
-            $data['active_pengisian'] = $this->pengisian_model->latest()->first_where(['id_pengisian' => $id_pengisian]);
+            $data['active_pengisian'] = $this->pengisian_model->first_where(['id_pengisian' => $id_pengisian, 'status' => 'dibuat']);
+        }
+
+        if (!$this->session->has_userdata('id_pengisian') && $this->session->has_userdata('id_user')) {
+            if ($pengisian = $this->pengisian_model->first_where(['id_user' => $this->session->userdata('id_user')])) {
+                $this->session->set_userdata('id_pengisian', $pengisian['id_pengisian']);
+
+                $data['active_pengisian'] = $pengisian;
+            }
         }
 
         $this->template->render_app('game', $data);

@@ -122,4 +122,9 @@ class Game_model extends CI_Model
 
         return $this;
     }
+
+    public function count_pengisian_dibuat()
+    {
+        return $this->db->select('COUNT(*) as pengisian_dibuat')->where('status', 'dibuat')->get('tbl_pengisian')->row_array()['pengisian_dibuat'];
+    }
 }

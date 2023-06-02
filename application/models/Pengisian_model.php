@@ -118,6 +118,6 @@ class Pengisian_model extends CI_Model
 
     public function exists($where)
     {
-        return $this->db->where($where)->select('count(*) as total')->get('tbl_pengisian_game')->row_array()['total'] > 0;
+        return $this->db->where($where)->select('count(*) as total')->get('tbl_pengisian')->row_array()['total'] > 0;
     }
 }

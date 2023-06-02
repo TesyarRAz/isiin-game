@@ -43,13 +43,13 @@ defined('BASEPATH') or exit('No direct script access allowed');
                         <a class="nav-link <?= uri_is('game', 'game/*') ? 'active' : '' ?>" href="<?= site_url('game') ?>">Games</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link <?= uri_is('welcome/harga') ? 'active' : '' ?>" href="<?= site_url('welcome/harga') ?>">Harga</a>
+                        <a class="nav-link <?= uri_is('harga', 'welcome/harga') ? 'active' : '' ?>" href="<?= site_url('harga') ?>">Harga</a>
                     </li>
                 </ul>
                 <ul class="navbar-nav">
                     <?php if (!$this->session->has_userdata('id_user')) : ?>
                         <li class="nav-item">
-                            <a class="nav-link <?= uri_is('welcome/login', 'welcome/register') ? 'active' : '' ?>" href="<?= site_url('welcome/login') ?>">
+                            <a class="nav-link <?= uri_is('login', 'register', 'welcome/login', 'welcome/register') ? 'active' : '' ?>" href="<?= site_url('login') ?>">
                                 <i class="fas fa-fw fa-user"></i>
                                 Masuk
                             </a>
@@ -61,16 +61,17 @@ defined('BASEPATH') or exit('No direct script access allowed');
                                 Dashboard
                             </a>
                         </li>
+                    <?php else : ?>
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                <i class="fas fa-fw fa-user me-1"></i>
+                                Akun
+                            </a>
+                            <ul class="dropdown-menu dropdown-menu-end">
+                                <li><a class="dropdown-item" href="<?= site_url('auth/logout') ?>">Logout</a></li>
+                            </ul>
+                        </li>
                     <?php endif ?>
-                    <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                            <i class="fas fa-fw fa-user me-1"></i>
-                            Akun
-                        </a>
-                        <ul class="dropdown-menu dropdown-menu-end">
-                            <li><a class="dropdown-item" href="<?= site_url('auth/logout') ?>">Logout</a></li>
-                        </ul>
-                    </li>
                 </ul>
             </div>
         </div>

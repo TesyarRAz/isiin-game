@@ -5,7 +5,22 @@ class Welcome extends CI_Controller
 {
 	public function index()
 	{
-		if ($kode = $this->input->get('kode')) {
+		$kode = $this->input->get('kode');
+
+		if (empty($kode)) {
+			if ($kode = $this->session->userdata('request_kode_pengisian')) {
+				$this->session->unset_userdata('request_kode_pengisian');
+			}
+		}
+
+		if ($kode) {
+			if (!$this->session->has_userdata('id_user')) 
+			{
+				$this->session->set_userdata('request_kode_pengisian', $kode);
+
+				return redirect('login');
+			}
+
 			if ($this->pengisian_model->exists(['kode_pengisian' => $kode])) {
 				$this->pengisian_model->add_user_to_pengisian(['kode_pengisian' => $kode], ['id_user' => $this->session->userdata('id_user')]);
 

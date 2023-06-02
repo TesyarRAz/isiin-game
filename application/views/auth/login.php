@@ -23,7 +23,7 @@ defined('BASEPATH') or exit('No direct script access allowed');
                     </div>
 
                     <div class="d-flex justify-content-between">
-                        <span>Belum punya akun? <a href="<?= site_url('welcome/register') ?>" class="text-decoration-none" tabindex="-1">Klik disini</a></span>
+                        <span>Belum punya akun? <a href="<?= site_url('register') ?>" class="text-decoration-none" tabindex="-1">Klik disini</a></span>
 
                         <div class="ms-auto">
                             <button type="submit" class="btn btn-dark">Masuk</button>

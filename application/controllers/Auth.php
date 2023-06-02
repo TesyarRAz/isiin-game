@@ -17,7 +17,7 @@ class Auth extends CI_Controller
         ]);
 
         if ($this->form_validation->run() == FALSE) {
-            return redirect('welcome/login');
+            return redirect('login');
         }
 
         $credentials = $this->input->post(['username', 'password']);
@@ -33,7 +33,7 @@ class Auth extends CI_Controller
         }
 
         $this->session->set_flashdata('message', 'Username atau password salah');
-        redirect('welcome/login');
+        redirect('login');
     }
 
     public function register()
@@ -56,7 +56,7 @@ class Auth extends CI_Controller
         ]);
 
         if ($this->form_validation->run() == FALSE) {
-            return redirect('welcome/login');
+            return redirect('login');
         }
 
         $credentials = $this->input->post(['nama', 'nomor_telepon', 'username', 'password']);
@@ -67,7 +67,7 @@ class Auth extends CI_Controller
 
         $this->session->set_flashdata('message', 'Berhasil membuat akun');
 
-        redirect('welcome/login');
+        redirect('login');
     }
 
     public function logout()

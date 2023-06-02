@@ -53,6 +53,8 @@ class Pengisian extends Admin_Controller
         $data = $this->input->post(['kode_pengisian', 'ukuran_penyimpanan', 'nama_pemesan', 'status']);
         $games = $this->input->post('games');
 
+        $data['ukuran_penyimpanan'] = $data['ukuran_penyimpanan'] * 1000;
+
         $id_pengisian = $this->pengisian_model->insert($data);
         $this->pengisian_model->sync_pengisian_game($id_pengisian, $games);
 
@@ -68,6 +70,8 @@ class Pengisian extends Admin_Controller
 
         $data['games'] = $this->game_model->latest()->all();
         $data['ids_game'] = $this->pengisian_model->pengisian_ids_games($id_pengisian);
+
+        $data['ukuran_penyimpanan'] = $data['ukuran_penyimpanan'] / 1000;
 
         $this->template->render_admin('admin/pengisian/edit', $data);
     }
@@ -97,6 +101,8 @@ class Pengisian extends Admin_Controller
 
         $data = $this->input->post(['kode_pengisian', 'ukuran_penyimpanan', 'nama_pemesan', 'status']);
         $games = $this->input->post('games');
+
+        $data['ukuran_penyimpanan'] = $data['ukuran_penyimpanan'] * 1000;
 
         $this->pengisian_model->update(['id_pengisian' => $id_pengisian], $data);
         $this->pengisian_model->sync_pengisian_game($id_pengisian, $games);

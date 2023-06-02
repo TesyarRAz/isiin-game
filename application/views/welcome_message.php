@@ -50,6 +50,15 @@
 											Atur Game
 										</button>
 									</form>
+								<?php else : ?>
+									<div class="d-flex flex-column mb-2">
+										<div>Games</div>
+										<div>
+											<?php foreach ($item['games'] as $game): ?>
+												<span class="badge bg-dark"><?= $game['nama_game'] ?></span>
+											<?php endforeach ?>
+										</div>
+									</div>
 								<?php endif ?>
 							</div>
 						</div>

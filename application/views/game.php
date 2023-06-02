@@ -26,13 +26,13 @@
     </div>
     <hr>
 
-    <div class="row mt-3">
+    <div class="row row-cols-xl-4 row-cols-lg-3 row-cols-md-2 row-cols-1 g-4">
         <?php foreach ($games as $game) : ?>
-            <div class="col-lg-3 col-md-4 col-6">
-                <div class="card">
-                    <img src="<?= base_url($game['gambar_game']) ?>" class="card-img-top img-fluid" alt="Gambar <?= $game['nama_game'] ?>">
+            <div class="col">
+                <div class="card h-100">
+                    <img src="<?= base_url($game['gambar_game']) ?>" class="card-img-top img-fluid" style="height: 200px;" alt="Gambar <?= $game['nama_game'] ?>">
                     <div class="card-body">
-                        <h5 class="card-title"><?= $game['nama_game'] ?></h5>
+                        <h6><?= $game['nama_game'] ?></h6>
                         <p class="card-text"><?= $game['deskripsi_game'] ?></p>
                         <span class="text-muted small">Ukuran : <?= ukuran_format($game['ukuran_game']) ?></span>
 

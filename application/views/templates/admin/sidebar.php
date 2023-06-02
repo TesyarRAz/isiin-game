@@ -31,6 +31,13 @@ defined('BASEPATH') or exit('No direct script access allowed');
         Pengelolaan
     </div>
 
+    <li class="nav-item <?= uri_is('admin/user', 'admin/user/*') ? 'active' : '' ?>">
+        <a class="nav-link" href="<?= site_url('admin/user') ?>">
+            <i class="fas fa-fw fa-users"></i>
+            <span>Kelola User</span>
+        </a>
+    </li>
+
     <li class="nav-item <?= uri_is('admin/kategori', 'admin/kategori/*') ? 'active' : '' ?>">
         <a class="nav-link" href="<?= site_url('admin/kategori') ?>">
             <i class="fas fa-fw fa-list"></i>

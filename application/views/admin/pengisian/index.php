@@ -27,8 +27,8 @@
                     <tr>
                         <td><?= ++$count ?></td>
                         <td><?= $item['kode_pengisian'] ?></td>
-                        <td><?= number_format($item['ukuran_penyimpanan'], 0, ',', '.') ?> MB</td>
-                        <td><?= number_format($item['ukuran_digunakan'], 0, ',', '.') ?> MB</td>
+                        <td><?= ukuran_format($item['ukuran_penyimpanan']) ?></td>
+                        <td><?= ukuran_format($item['ukuran_digunakan']) ?></td>
                         <td>
                             <?php if (isset($item['games'])) : ?>
                                 <?php foreach ($item['games'] as $game) : ?>

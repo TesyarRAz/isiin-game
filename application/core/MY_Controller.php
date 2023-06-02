@@ -31,7 +31,7 @@ class User_Controller extends MY_Controller {
         parent::__construct();
 
         if (!$this->session->has_userdata('id_user')) {
-            redirect('welcome/login');
+            redirect('login');
         }
     }
 }
@@ -41,7 +41,7 @@ class Admin_Controller extends User_Controller {
         parent::__construct();
 
         if ($this->session->userdata('role') != 'admin') {
-            redirect('welcome/login');
+            redirect('login');
         }
     }
 }
