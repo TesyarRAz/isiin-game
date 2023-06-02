@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost:3306
--- Generation Time: May 30, 2023 at 01:33 PM
+-- Generation Time: Jun 02, 2023 at 10:37 AM
 -- Server version: 8.0.30
 -- PHP Version: 8.1.10
 
@@ -35,6 +35,14 @@ CREATE TABLE `tbl_game` (
   `deskripsi_game` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
+--
+-- Dumping data for table `tbl_game`
+--
+
+INSERT INTO `tbl_game` (`id_game`, `nama_game`, `ukuran_game`, `gambar_game`, `deskripsi_game`) VALUES
+(7, 'Naruto Ultimate Ninja Storm 4', 40000, '/uploads/cd0b8590c26890c589d082d2f4d00613.jpg', 'game naruto storm 4'),
+(8, 'God Of War', 30000, '/uploads/a9b57867ff7deca686b358b3578a49c9.jpg', 'game valorant');
+
 -- --------------------------------------------------------
 
 --
@@ -57,7 +65,10 @@ INSERT INTO `tbl_kategori` (`id_kategori`, `nama_kategori`) VALUES
 (5, 'Horror'),
 (6, 'FPS'),
 (7, 'RPG'),
-(8, 'Open World');
+(8, 'Open World'),
+(9, 'Survival'),
+(10, 'Action'),
+(11, 'Anime');
 
 -- --------------------------------------------------------
 
@@ -70,6 +81,17 @@ CREATE TABLE `tbl_kategori_game` (
   `id_kategori` int NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
+--
+-- Dumping data for table `tbl_kategori_game`
+--
+
+INSERT INTO `tbl_kategori_game` (`id_game`, `id_kategori`) VALUES
+(7, 11),
+(7, 10),
+(7, 4),
+(8, 6),
+(8, 4);
+
 -- --------------------------------------------------------
 
 --
@@ -79,10 +101,20 @@ CREATE TABLE `tbl_kategori_game` (
 CREATE TABLE `tbl_pengisian` (
   `kode_pengisian` varchar(255) NOT NULL,
   `id_pengisian` int NOT NULL,
-  `id_user` int NOT NULL,
+  `id_user` int DEFAULT NULL,
   `ukuran_penyimpanan` int NOT NULL,
-  `ukuran_digunakan` int NOT NULL
+  `ukuran_digunakan` int NOT NULL,
+  `nama_pemesan` varchar(255) NOT NULL,
+  `status` enum('dibuat','diatur','selesai') NOT NULL DEFAULT 'dibuat'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+--
+-- Dumping data for table `tbl_pengisian`
+--
+
+INSERT INTO `tbl_pengisian` (`kode_pengisian`, `id_pengisian`, `id_user`, `ukuran_penyimpanan`, `ukuran_digunakan`, `nama_pemesan`, `status`) VALUES
+('ISI1685498193', 2, 2, 1024000, 40000, 'Yanton', 'diatur'),
+('ISI1685700653', 4, 3, 256000, 70000, 'asdsad', 'selesai');
 
 -- --------------------------------------------------------
 
@@ -95,6 +127,27 @@ CREATE TABLE `tbl_pengisian_game` (
   `id_game` int NOT NULL,
   `ukuran_digunakan` int NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+--
+-- Dumping data for table `tbl_pengisian_game`
+--
+
+INSERT INTO `tbl_pengisian_game` (`id_pengisian`, `id_game`, `ukuran_digunakan`) VALUES
+(2, 7, 0),
+(4, 8, 0),
+(4, 7, 0);
+
+--
+-- Triggers `tbl_pengisian_game`
+--
+DELIMITER $$
+CREATE TRIGGER `decrease_ukuran_digunakan` AFTER DELETE ON `tbl_pengisian_game` FOR EACH ROW UPDATE tbl_pengisian SET ukuran_digunakan = ukuran_digunakan -(SELECT tbl_game.ukuran_game FROM tbl_game WHERE tbl_game.id_game = old.id_game) WHERE id_pengisian = old.id_pengisian
+$$
+DELIMITER ;
+DELIMITER $$
+CREATE TRIGGER `increase_ukuran_digunakan` AFTER INSERT ON `tbl_pengisian_game` FOR EACH ROW UPDATE tbl_pengisian SET ukuran_digunakan = ukuran_digunakan +(SELECT tbl_game.ukuran_game FROM tbl_game WHERE tbl_game.id_game = new.id_game) WHERE id_pengisian = new.id_pengisian
+$$
+DELIMITER ;
 
 -- --------------------------------------------------------
 
@@ -116,7 +169,9 @@ CREATE TABLE `tbl_user` (
 --
 
 INSERT INTO `tbl_user` (`id_user`, `role`, `nama`, `username`, `password`, `nomor_telepon`) VALUES
-(1, 'admin', 'admin', 'admin', '$2y$10$vyPG8QcaDi8PghFjLXFFxeMw4Jo.wFGYjFi/ondXmBZ/CR70jKlKy', '081231231231');
+(1, 'admin', 'admin', 'admin', '$2y$10$vyPG8QcaDi8PghFjLXFFxeMw4Jo.wFGYjFi/ondXmBZ/CR70jKlKy', '081231231231'),
+(2, 'user', 'user', 'user', '$2y$10$g0akqKYlPxotXRwXIFc.wenCbFtQHyuvRfO9MqivEQfnUKAJKLms6', '081212121212'),
+(3, 'user', 'kkkkk', 'user2', '$2y$10$pMx7fKdtb9unTBRDET1Oz.pIe6KcR9Na5NtIIkFdZF7Q2Glz9vNGu', '081392837484');
 
 --
 -- Indexes for dumped tables
@@ -172,25 +227,25 @@ ALTER TABLE `tbl_user`
 -- AUTO_INCREMENT for table `tbl_game`
 --
 ALTER TABLE `tbl_game`
-  MODIFY `id_game` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `id_game` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
 -- AUTO_INCREMENT for table `tbl_kategori`
 --
 ALTER TABLE `tbl_kategori`
-  MODIFY `id_kategori` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+  MODIFY `id_kategori` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
 
 --
 -- AUTO_INCREMENT for table `tbl_pengisian`
 --
 ALTER TABLE `tbl_pengisian`
-  MODIFY `id_pengisian` int NOT NULL AUTO_INCREMENT;
+  MODIFY `id_pengisian` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT for table `tbl_user`
 --
 ALTER TABLE `tbl_user`
-  MODIFY `id_user` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id_user` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- Constraints for dumped tables
